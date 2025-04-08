@@ -70,8 +70,6 @@ const Progressbar: React.FC = () => {
       <Box className={classes.wrapper}>
         <ScaleFade
           visible={visible}
-          duration={400}
-          timingFunction="ease"
           onExitComplete={() => fetchNui('progressComplete')}
         >
           <Box className={classes.container}>
