@@ -31,8 +31,8 @@ jobs:
         with:
           node-version: 16.x
 
-      - name: Set env
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Extract clean version
+        run: echo "CLEAN_VERSION=${RELEASE_VERSION#v}" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: pnpm install
@@ -43,8 +43,9 @@ jobs:
         working-directory: package
 
       - name: Bump package version
-        run: pnpm version ${{ github.ref_name }}
+        run: pnpm version $CLEAN_VERSION
         working-directory: package
+
 
       - name: Run build
         run: pnpm build
