@@ -83,7 +83,7 @@ jobs:
         uses: "marvinpinto/action-automatic-releases@v1.2.1"
         id: auto_release
         with:
-          repo_token: "${{ secrets.GH_TOKEN }}"
+          token: "${{ secrets.GH_TOKEN }}"
           title: ${{ env.RELEASE_VERSION }}
           prerelease: false
           files: ox_lib.zip
