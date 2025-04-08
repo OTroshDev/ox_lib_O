@@ -9,9 +9,11 @@ const useStyles = createStyles((theme) => ({
   container: {
     width: 350,
     height: 45,
-    borderRadius: theme.radius.sm,
-    backgroundColor: theme.colors.dark[5],
+    borderRadius: theme.radius.lg,
+    backgroundColor: theme.colors.dark[6],
     overflow: 'hidden',
+    position: 'relative',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.25)', // Ajout ombre fluide
   },
   wrapper: {
     width: '100%',
@@ -24,7 +26,9 @@ const useStyles = createStyles((theme) => ({
   },
   bar: {
     height: '100%',
-    backgroundColor: theme.colors[theme.primaryColor][theme.fn.primaryShade()],
+    background: `linear-gradient(90deg, ${theme.colors[theme.primaryColor][6]}, ${theme.colors[theme.primaryColor][4]})`,
+    borderRadius: theme.radius.lg,
+    transition: 'width 0.4s ease-in-out, background 0.3s ease', // transition fluide
   },
   labelWrapper: {
     position: 'absolute',
@@ -33,6 +37,7 @@ const useStyles = createStyles((theme) => ({
     height: 45,
     alignItems: 'center',
     justifyContent: 'center',
+    pointerEvents: 'none',
   },
   label: {
     maxWidth: 350,
@@ -41,8 +46,8 @@ const useStyles = createStyles((theme) => ({
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     fontSize: 20,
-    color: theme.colors.gray[3],
-    textShadow: theme.shadows.sm,
+    color: theme.white,
+    textShadow: '1px 1px 4px rgba(0,0,0,0.6)',
   },
 }));
 
@@ -63,7 +68,12 @@ const Progressbar: React.FC = () => {
   return (
     <>
       <Box className={classes.wrapper}>
-        <ScaleFade visible={visible} onExitComplete={() => fetchNui('progressComplete')}>
+        <ScaleFade
+          visible={visible}
+          duration={400}
+          timingFunction="ease"
+          onExitComplete={() => fetchNui('progressComplete')}
+        >
           <Box className={classes.container}>
             <Box
               className={classes.bar}
